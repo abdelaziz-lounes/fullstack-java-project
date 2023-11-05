@@ -1,11 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
-  username='abdo';
-  password='';
+export class LoginComponent implements OnInit{
+  username = 'abdo'
+  password = ''
+  errorMessage = 'Invalid Credentials'
+  invalidLogin = false
+
+  constructor(private router:Router) {
+  }
+  ngOnInit(){}
+  handleLogin() {
+    // console.log(this.username);
+    if(this.username==="abdo" && this.password === 'dummy') {
+      //Redirect to Welcome Page
+      this.router.navigate(['welcome', this.username]);
+      this.invalidLogin = false
+    } else {
+      this.invalidLogin = true
+    }
+  }
 }
